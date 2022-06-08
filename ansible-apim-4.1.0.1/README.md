@@ -1,17 +1,70 @@
+# Links úteis:
+
+- [WSO2 API MANAGER](https://wso2.com/br/api-manager/#)
+
+- [Binário da Versão 4.1.0 Community](https://github.com/wso2/product-apim/releases/download/v4.1.0/wso2am-4.1.0.zip)
+
+
+- [Ansible Scripts](https://product-dist.wso2.com/downloads/api-manager/4.1.0/instruction-pages/subscription/ansible/ansible-apim-4.1.0.1.zip)
+
+
+- [Github GOVBR](http://tools.govbr.com.br/gitlab/jefferson.silva/treinamento-wso2)
+
+- [Instalação Ansible Amazon Linux](https://devcoops.com/install-ansible-on-aws-ec2-amazon-linux/)
+
+- [JAVA 11 AWS](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html)
+```
+wget https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.gz
+* OBS: Não esqueça de renomear o nome do arquivo de acordo com o video
+```
+
+- [PGADMIN para Docker](https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html)
+
+```
+docker run -p 80:80 \
+    -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' \
+    -e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' \
+    -e 'PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True' \
+    -e 'PGADMIN_CONFIG_LOGIN_BANNER="Authorised users only!"' \
+    -e 'PGADMIN_CONFIG_CONSOLE_LOG_LEVEL=10' \
+    -d dpage/pgadmin4
+```
+- [Portainer Community](https://docs.portainer.io/v/ce-2.9/start/install/server/docker/linux)
+
+```
+docker volume create portainer_data
+```
+
+```
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v portainer_data:/data \
+    portainer/portainer-ce:2.9.3
+
+```
+
+- [Driver Postgres](https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.10/postgresql-42.2.10.jar)
+
+
+
+
+
+
 # WSO2 API Management Ansible scripts
 
-This repository contains the Ansible scripts for installing and configuring WSO2 API Management.
+Este repositório contém os scripts Ansible para instalação e configuração do WSO2 API Management.
 
-## Supported Operating Systems
+## Sistemas Operacionais Suportados
 
 - Ubuntu 16.04 or higher
 - CentOS 7
 
-## Supported Ansible Versions
+## Suporte a versão do Ansible
 
-- Ansible 2.5 or higher
+- Ansible 2.9 ou maior
 
-## Directory Structure
+## Estrutura de Diretórios Ansible
 ```
 .
 ├── dev
@@ -22,6 +75,7 @@ This repository contains the Ansible scripts for installing and configuring WSO2
 │   │   ├── apim-gateway_1.yml
 │   │   ├── apim-tm_1.yml
 │   │   ├── apim_1.yml
+│   │   ├── apim_2.yml
 │   └── inventory
 ├── docs
 │   ├── images
@@ -70,79 +124,80 @@ This repository contains the Ansible scripts for installing and configuring WSO2
 
 ```
 
-Following instructions can be followed to deploy a all-in-one standard APIM deployment to tryout the product and for demonstrations purposes. If you want to deploy a production ready deployment pattern refer the documentation in the `docs` directory.
+As instruções a seguir podem ser seguidas para uma implantação de APIM padrão tudo-em-um( All in one) para implantar o produto ou para fins de demonstração. Se você deseja  um padrão de implantação pronto para produção, consulte a documentação no diretório `docs`.
 
+## Copiando pacotes localmente
+Os pacotes podem ser copiados para um diretório local ou baixados de um local remoto.
 
-## Copying packs locally
-Packs could be either copied to a local directory, or downloaded from a remote location.
+Copie os seguintes arquivos para o diretório `files/packs`.
 
-Copy the following files to `files/packs` directory.
 
 1. [WSO2 API Manager 4.1.0 package (.zip)](https://wso2.com/api-management/install/)
 
-Copy the following files to `files/lib` directory.
+Copie os seguintes arquivos para o diretório `files/lib`.
 
 1. [Amazon Corretto for Linux x64 JDK 11 (.tar.gz)](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html)
 
-Copy the miscellaneous files to `files/misc` directory. To enable file copying,  uncomment the `misc_file_list` in the yaml files under `group_vars` and add the miscellaneous files to the list.
+Copie os arquivos diversos para o diretório `files/misc`. Para habilitar a cópia de arquivos, descomente o `misc_file_list` nos arquivos yaml em `group_vars` e adicione os arquivos diversos à lista.
 
-## Downloading from remote location
+## Downloading de um local remoto
 
-In **group_vars**, change the values of the following variables in all groups:
-1. The value of `pack_location` should be changed from "local" to "remote"
-2. The value of `remote_jdk` should be changed to the URL in which the JDK should be downloaded from, and remove it as a comment.
-3. The value of `remote_pack` should be changed to the URL in which the package should be downloaded from, and remove it as a comment.
+Em **group_vars**, altere os valores das seguintes variáveis em todos os grupos:
+1. O valor de `pack_location` deve ser alterado de "local" para "remote"
+2. O valor de `remote_jdk` deve ser alterado para o URL no qual o JDK deve ser baixado e removê-lo como um comentário.
+3. O valor de `remote_pack` deve ser alterado para o URL no qual o pacote deve ser baixado e removê-lo como um comentário.
 
-## Running WSO2 API Management Ansible scripts
+## Executando scripts Ansible do WSO2 API Management
 
-### 1. Run the existing scripts without customization
-The existing Ansible scripts contain the configurations to set-up a single node WSO2 API Manager pattern. In order to deploy the pattern, you need to replace the `[ip_address]` and `[ssh_user]` given in the `inventory` file under `dev` folder by the IP of the location where you need to host the API Manager. An example is given below.
+### 1. Execute os scripts existentes sem personalização
+
+Os scripts do Ansible existentes contêm as configurações para definir um padrão do WSO2 API Manager de nó único. Para implantar o padrão, você precisa substituir o `[ip_address]` e o `[ssh_user]` fornecidos no arquivo `inventory` na pasta `dev` pelo IP do local onde você precisa hospedar o API Manager. Um exemplo é dado abaixo.
+
 ```
 [apim]
 apim_1 ansible_host=172.28.128.4 ansible_user=vagrant
 ```
 
-Then, update the hostname in dev/host_vars/apim_1.yml with ansible_host, 172.28.128.4
+Em seguida, atualize o nome do host em dev/host_vars/apim_1.yml com ansible_host, 172.28.128.4
 
-Run the following command to run the scripts. Use `-K` to provide a password to become root. Configure `become_method:` in `ansible.cfg` when using an alternative to
-`sudo`. If your host allows passwordless `sudo`, then omit the `-K` argument.
-
+Execute o seguinte comando para executar os scripts. Use `-K` para fornecer uma senha para se tornar root. Configure `become_method:` em `ansible.cfg` ao usar uma alternativa para
+`sudo`. Se o seu host permite `sudo` sem senha, então omita o argumento `-K`.
 `ansible-playbook -K -i dev site.yml`
 
-If you need to alter the configurations given, please change the parameterized values in the yaml files under `group_vars` and `host_vars`.
+Se você precisar alterar as configurações fornecidas, altere os valores parametrizados nos arquivos yaml em `group_vars` e `host_vars`.
 
-**NOTE:**
-> If you have mounted the 'persistent artifacts' as guided [below](##configuration-guide), make sure to unmount the artifacts, prior to running the Ansible playbook as the playbook running process has a step to remove the existing setup. After completing the Ansible playbook running process, make sure to remount the artifacts.
+**NOTA:**
+> Se você montou os 'artefatos persistentes' conforme guiado [abaixo](##configuration-guide), certifique-se de desmontar os artefatos antes de executar o playbook do Ansible, pois o processo de execução do playbook tem uma etapa para remover a configuração existente. Depois de concluir o processo de execução do playbook do Ansible, certifique-se de remontar os artefatos.
 
-> If the `client-truststore.jks` is monuted among the Gateway nodes, then make sure to copy the `client-truststore.jks` from the mount source to the `<ANSIBLE_HOME>/files/security/wso2am/` directory of the Ansible resources, prior to re-running the playbook.
+> Se o `client-truststore.jks` estiver montado entre os nós do Gateway, certifique-se de copiar o `client-truststore.jks` da fonte de montagem para o diretório `<ANSIBLE_HOME>/files/security/wso2am/` do os recursos do Ansible, antes de executar novamente o playbook.
 
-### 2. Customize the WSO2 Ansible scripts
+### 2. Personalize os scripts do WSO2 Ansible
 
-The templates that are used by the Ansible scripts are in j2 format in-order to enable parameterization.
+Os modelos usados pelos scripts Ansible estão no formato j2 para permitir a parametrização.
 
-The `deployment.toml.j2` file is added under `roles/apim/templates/carbon-home/repository/conf/`, in order to enable customizations. You can add any other customizations to `custom.yml` under tasks of each role as well.
+O arquivo `deployment.toml.j2` é adicionado em `roles/apim/templates/carbon-home/repository/conf/`, para permitir personalizações. Você também pode adicionar outras personalizações ao `custom.yml` nas tarefas de cada função.
 
-#### Step 1
-Uncomment the following line in `main.yml` under the role you want to customize.
+#### Passo 1
+Remova o comentário da linha a seguir em `main.yml` na função que você deseja personalizar.
 ```
 - import_tasks: custom.yml
 ```
 
-#### Step 2
-Add the configurations to the `custom.yml`. A sample is given below.
+#### Passo 2
+Adicione as configurações ao `custom.yml`. Uma amostra é dada abaixo.
 
 ```
-- name: "Copy custom file"
+- name: "Copiar arquivo personalizado"
   template:
     src: path/to/example/file/example.xml.j2
     dest: destination/example.xml.j2
   when: "(inventory_hostname in groups['am'])"
 ```
 
-Follow the steps mentioned under `docs` directory to customize/create new Ansible scripts and deploy the recommended patterns.
+Siga as etapas mencionadas no diretório `docs` para personalizar/criar novos scripts Ansible e implantar os padrões recomendados.
 
-#### Including custom Keystore and Truststore
-If custom keystores and truststores are needed to be added, uncomment the below list in the yml file
+#### Incluindo Keystore e Truststore personalizados
+Se for necessário adicionar keystores e truststores personalizados, remova o comentário da lista abaixo no arquivo yml
 ```
 # security_file_list:
 #   - { src: '{{ security_file_location }}/wso2am-analytics/client-truststore.jks',
@@ -150,29 +205,80 @@ If custom keystores and truststores are needed to be added, uncomment the below 
 #   - { src: '{{ security_file_location }}/wso2am-analytics/wso2carbon.jks',
 #       dest: '{{ carbon_home }}/resources/security/wso2carbon.jks' }
 ```
-Then save the changed file and add the required files under `files/security/<product-home>/<path-to-file>`
+Deixe na forma abaixo
+```
+security_file_list:
+  - { src: '{{ security_file_location }}/wso2am/client-truststore.jks',
+     dest: '{{ carbon_home }}/repository/resources/security/client-truststore.jks' }
+  - { src: '{{ security_file_location }}/wso2am/wso2carbon.jks',
+     dest: '{{ carbon_home }}/repository/resources/security/wso2carbon.jks' }
+```
+
+Em seguida, salve o arquivo alterado e adicione os arquivos necessários em `files/security/<product-home>/<path-to-file>`
+
+##### Modificando a senha do Keystore 
+Antes de começar copie os arquivos do diretório `default para o diretório wso2am`
+
+1. Em `<home-diretorio>/files/security` navegue até o subdiretorio chamado `wso2am`e dentro dele crie um diretório `default`para os certificados originais.
+2. No binário do wso2apim que você realizou o Download e descompactou de acordo com o video, copie os certificados para dentro da pasta `default` são eles:
+`cliente-trustecore.jks e wso2carbon.jks`ambos por padrão possuem usuario e senha `wso2carbon` e não seria legal deixar essa configuração de segurança como padrão.
+3. Ulilize o Java keytool `JAVA_HOME/bin/keytool`
+  3.1. listando os certificados
+
+```
+sudo keytool -v -list -keystore wso2carbon.jks -alias wso2carbon -storepass wso2carbon
+sudo keytool -v -list -keystore client-truststore.jks -alias wso2carbon -storepass wso2carbon
+
+```
+  3.2. mudar senha de um alias - OBS(anote esta senha para atualizar o script) 
+  ex.: `supersenha`
+
+```
+
+sudo keytool -storepasswd  -alias wso2carbon -keystore wso2carbon.jks
+sudo keytool -keypasswd  -alias wso2carbon -keystore wso2carbon.jks
+sudo keytool -storepasswd  -alias wso2carbon -keystore client-truststore.jks
+
+```
+- Liste os certificados com a nova senha no passo 3.1 passando a nova senha
+
+
+
 
 ## Performance Tuning
 
-System configurations can be changed through Ansible to optimize OS level performance. Performance tuning can be enabled by changing `enable_performance_tuning` in `dev/group_vars/apim.yml` to `true`.
+As configurações do sistema podem ser alteradas por meio do Ansible para otimizar o desempenho no nível do sistema operacional. O ajuste de desempenho pode ser ativado alterando `enable_performance_tuning` em `dev/group_vars/apim.yml` para `true`.
 
-System files that will be updated when performance tuning are enabled is available in `files/system`. Update the configuration values according to the requirements of your deployment.
+Os arquivos do sistema que serão atualizados quando o ajuste de desempenho estiver ativado estão disponíveis em `files/system`. Atualize os valores de configuração de acordo com os requisitos de sua implantação.
 
-## Configuration Guide
+## Guia de Configuração
 
-Refer the below documentation on configuring key-stores for APIM and APIM-Analytics
-1. [WSO2 API Manager key-stores configuration guide](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/security/configuring-keystores/configuring-keystores-in-wso2-api-manager/)
+Consulte a documentação abaixo sobre como configurar armazenamentos de chaves para APIM e APIM-Analytics
+1. [WSO2 API Manager key-stores guia de configuração](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/security/configuring-keystores/configuring-keystores-in-wso2-api-manager/)
 
-Refer the below documentation on configuring persistent artifacts of the servers.
-1. [Persistent artifacts of the servers](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/reference/common-runtime-and-configuration-artifacts/)
+Consulte a documentação abaixo sobre como configurar artefatos persistentes dos servidores.
+1. [Artefatos persistentes dos servidores](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/reference/common-runtime-and-configuration-artifacts/)
 
-Refer the below documentation on configuring Load-Balancers for your deoloyment.
-1. [Load balancer configurations](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/setting-up-proxy-server-and-the-load-balancer/configuring-the-proxy-server-and-the-load-balancer/)
+Consulte a documentação abaixo sobre como configurar Load-Balancers para sua implantação.
+1. [Configurações de Load balancer](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/setting-up-proxy-server-and-the-load-balancer/configuring-the-proxy-server-and-the-load-balancer/)
 
-## Previous versions of Ansible
+## Versões anteriores do Ansible
 
-The master branch of this repository contains the latest product version with the latest Ansible version. The Ansible resources for previous Ansible versions can be found in the branches. The following is an example.
+A ramificação mestre deste repositório contém a versão mais recente do produto com a versão mais recente do Ansible. Os recursos do Ansible para versões anteriores do Ansible podem ser encontrados nas ramificações. Veja o exemplo abaixo.
 
-#### Ansible resources for API Manager 4.0.0
+#### Recursos do Ansible para API Manager 4.0.0
+
 
 Branch name: 4.0.x
+
+
+
+
+
+
+
+## Atualizando service provider
+regexp=(
+  /services/auth/callback/login|https://ec2-52-67-31-221.sa-east-1.compute.amazonaws.com:9443/publisher/services/auth/callback/logout)
+
+regexp=(https://localhost:9443/publisher/services/auth/callback/login|https://localhost:9443/publisher/services/auth/callback/logout)
