@@ -13,17 +13,29 @@ create_admin_account = true
 [user_store]
 type = "database_unique_id"
 
+
 [database.apim_db]
 type = "{{ wso2am_db_type }}"
 url = "{{ wso2am_db_url }}"
 username = "{% if secure_vault_enabled|bool %}$secret{wso2am_db_username}{% else %}{{ wso2am_db_username }}{% endif %}"
 password = "{% if secure_vault_enabled|bool %}$secret{wso2am_db_password}{% else %}{{ wso2am_db_password }}{% endif %}"
+driver = "{{ postgres_driver }}"
+validationQuery = "{{ wso2am_db_validation_query }}"
+pool_options.maxActive = 50
+pool_options.maxWait = 30000
 
 [database.shared_db]
 type = "{{ wso2shared_db_type }}"
 url = "{{ wso2shared_db_url }}"
 username = "{% if secure_vault_enabled|bool %}$secret{wso2shared_db_username}{% else %}{{ wso2shared_db_username }}{% endif %}"
 password = "{% if secure_vault_enabled|bool %}$secret{wso2shared_db_password}{% else %}{{ wso2shared_db_password }}{% endif %}"
+driver = "{{ postgres_driver }}"
+validationQuery = "{{ wso2shared_db_validation_query }}"
+pool_options.maxActive = 100
+pool_options.maxWait = 10000
+pool_options.validationInterval = 10000
+
+
 
 [keystore.tls]
 file_name =  "{{ tls_key_store_name }}"
