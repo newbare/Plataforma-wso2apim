@@ -34,7 +34,7 @@ backup_enabled: false
 
 # User manager configurations
 admin_username: admin
-admin_password: admin
+admin_password: adminadmin
 
 # Performance tuning configurations for the operating system
 enable_performance_tuning: false
