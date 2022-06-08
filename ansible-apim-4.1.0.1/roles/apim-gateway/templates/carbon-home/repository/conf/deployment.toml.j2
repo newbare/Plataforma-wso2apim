@@ -1,0 +1,115 @@
+[server]
+#hostname = "gw.wso2.com"
+server_role = "gateway-worker"
+
+[user_store]
+type = "database_unique_id"
+
+[super_admin]
+username = "{% if secure_vault_enabled|bool %}$secret{admin_username}{% else %}{{ admin_username }}{% endif %}"
+password = "{% if secure_vault_enabled|bool %}$secret{admin_password}{% else %}{{ admin_password }}{% endif %}"
+create_admin_account = true
+
+[database.shared_db]
+type = "{{ wso2shared_db_type }}"
+hostname = "{{ wso2shared_db_url }}"
+name = "{{ wso2shared_db_name }}"
+port = "{{ wso2shared_db_port }}"
+username = "{% if secure_vault_enabled|bool %}$secret{wso2shared_db_username}{% else %}{{ wso2shared_db_username }}{% endif %}"
+password = "{% if secure_vault_enabled|bool %}$secret{wso2shared_db_password}{% else %}{{ wso2shared_db_password }}{% endif %}"
+
+[keystore.tls]
+file_name =  "{{ tls_key_store_name }}"
+type =  "JKS"
+password =  "{% if secure_vault_enabled|bool %}$secret{tls_key_store_password}{% else %}{{ tls_key_store_password }}{% endif %}"
+alias =  "{{ tls_key_store_key_alias }}"
+key_password =  "{% if secure_vault_enabled|bool %}$secret{tls_key_store_key_password}{% else %}{{ tls_key_store_key_password }}{% endif %}"
+
+[truststore]
+file_name = "{{ trust_store_name }}"
+type = "JKS"
+password = "{% if secure_vault_enabled|bool %}$secret{trust_store_password}{% else %}{{ trust_store_password }}{% endif %}"
+
+[apim.key_manager]
+service_url = "{{ key_manager_server_url }}"
+username= "$ref{super_admin.username}"
+password= "$ref{super_admin.password}"
+
+{% if jwt_enable is defined %}
+ # JWT Generation
+[apim.jwt]
+enable = "{{ jwt_enable | bool | lower }}"
+encoding = "{{ jwt_encoding }}"
+generator_impl = "{{ jwt_generator_impl }}"
+claim_dialect = "{{ jwt_claim_dialect }}"
+header = "{{ jwt_header }}"
+signing_algorithm = "{{ jwt_signing_algorithm }}"
+enable_user_claims = "{{ jwt_enable_user_claims | bool | lower }}"
+claims_extractor_impl = "{{ jwt_claims_extractor_impl }}"
+{% endif %}
+
+[apim.sync_runtime_artifacts.gateway]
+gateway_labels = [{% for label in sync_runtime_gateway_labels %}"{{ label }}"{%- if not loop.last -%},{% endif %}{% endfor %}]
+
+[apim.throttling]
+username = "$ref{super_admin.username}"
+password = "$ref{super_admin.password}"
+service_url = "{{ traffic_manager_host_url }}/services/"
+throttle_decision_endpoints = [{% for endpoint in throttle_decision_endpoints %}"{{ endpoint }}"{%- if not loop.last -%},{% endif %}{% endfor %}]
+enable_unlimited_tier = true
+enable_header_based_throttling = false
+enable_jwt_claim_based_throttling = false
+enable_query_param_based_throttling = false
+
+{% for url_group in throttling_url_group %}
+[[apim.throttling.url_group]]
+traffic_manager_urls=[{% for url in url_group['traffic_manager_urls'] %}"{{ url }}"{%- if not loop.last -%},{% endif %}{% endfor %}]
+traffic_manager_auth_urls=[{% for url in url_group['traffic_manager_auth_urls'] %}"{{ url }}"{%- if not loop.last -%},{% endif %}{% endfor %}]
+{% endfor %}
+
+[apim.analytics]
+enable = {{ analytics_apim_enabled | bool | lower }}
+auth_token = "{{ analytics_apim_auth_token }}"
+
+# Caches
+[apim.cache.gateway_token]
+enable = true
+expiry_time = 15
+
+[apim.cache.resource]
+enable = true
+
+[apim.cache.jwt_claim]
+enable = true
+expiry_time = 900
+
+[apim.oauth_config]
+enable_outbound_auth_header = true
+auth_header = "Authorization"
+
+[apim.cors]
+allow_origins = "*"
+allow_methods = ["GET","PUT","POST","DELETE","PATCH","OPTIONS"]
+allow_headers = ["authorization","Access-Control-Allow-Origin","Content-Type","SOAPAction"]
+allow_credentials = false
+
+{% if gw_https_proxy_port is defined %}
+[transport.https.properties]
+proxyPort = {{ gw_https_proxy_port }}
+{% endif %}
+
+{% if secure_vault_enabled|bool %}
+[secrets]
+admin_password = "[{{ admin_password }}]"
+wso2am_db_username = "[{{ wso2am_db_username }}]"
+wso2am_db_password = "[{{ wso2am_db_password }}]"
+wso2shared_db_username = "[{{ wso2shared_db_username }}]"
+wso2shared_db_password = "[{{ wso2shared_db_password }}]"
+primary_key_store_password = "[{{ primary_key_store_password }}]"
+primary_key_store_key_password = "[{{ primary_key_store_key_password }}]"
+trust_store_password = "[{{ trust_store_password }}]"
+internal_key_store_key_password = "[{{ internal_key_store_key_password }}]"
+internal_key_store_password = "[{{ internal_key_store_password }}]"
+tls_key_store_key_password = "[{{ tls_key_store_key_password }}]"
+tls_key_store_password = "[{{ tls_key_store_password }}]"
+{% endif %}
