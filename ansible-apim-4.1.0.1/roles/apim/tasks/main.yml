@@ -55,13 +55,14 @@
       file:
         path: "{{ carbon_home }}"
         state: absent
+      when: setup_wso2_enabled|bool
 
     - name: Unzip WSO2 API Manager Package from local source
       unarchive:
         src: "{{ product_package_location }}/packs/{{ product_name }}-{{ product_version }}.zip"
         dest: "{{ product_dir }}"
         mode: u=rw,g=r,o=r
-      when: pack_location == "local"
+      when: pack_location == "local" and setup_wso2_enabled|bool
 
     - name: Unzip WSO2 API Manager Package from remote source
       unarchive:
@@ -69,7 +70,7 @@
         dest: "{{ product_dir }}"
         mode: u=rw,g=r,o=r
         remote_src: yes
-      when: pack_location == "remote"
+      when: pack_location == "remote" and setup_wso2_enabled|bool
 
     - name: Check if backup of deployment resources exists
       stat:

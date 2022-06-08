@@ -86,6 +86,9 @@ java_dir: /opt
 java_symlink: "{{ java_dir }}/java"
 java_home: "{{ java_dir }}/{{ jdk_name }}"
 
+# WSO2 Distributions
+setup_wso2_enabled: false
+
 # Server URL of the Authentication service. Make sure to import the Key Manager's public certificate to WSO2 API-M's
 # client-truststore.jks. For more information, see https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores
 key_manager_server_url: https://ec2-44-201-113-40.compute-1.amazonaws.com:${mgt.transport.https.port}/services/
