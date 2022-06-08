@@ -22,8 +22,9 @@ hostname: ec2-44-201-113-40.compute-1.amazonaws.com
 ports_offset: 0
 
 
+
 # api-manager.xml configs
-oauth_configs_revoke_api_url: https://localhost:${https.nio.port}/revoke
+oauth_configs_revoke_api_url: https://ec2-44-201-113-40.compute-1.amazonaws.com:${https.nio.port}/revoke
 
 # Heap memory allocation
 apim_memory: -Xms256m -Xmx1024m
