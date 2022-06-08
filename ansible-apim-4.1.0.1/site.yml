@@ -28,7 +28,7 @@
   roles:
     - apim
 
-#- name: Apply Micro Integrator default configuration to a micro-integrator node
+- name: Apply Micro Integrator default configuration to a micro-integrator node
   hosts:
     - micro-integrator_1
   roles:
