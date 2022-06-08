@@ -26,6 +26,8 @@ misc_file_copy_location: "{{ target }}/misc"
 security_file_location: "{{ product_package_location }}/security"
 #If you uncomment the below line to set the jdbc driver, change the driver name accordingly
 #jdbc_driver: mysql-connector-java-5.1.47-bin.jar
+jdbc_driver: postgresql-42.2.10.jar
+postgres_driver: org.postgresql.Driver
 
 # Set backup_enabled to true to backup <carbon-home>/repository/deployment/server directory
 backup_enabled: false
@@ -133,15 +135,17 @@ workflow_token_endpoint: https://localhost:9443/oauth2/token
 workflow_client_registration_endpoint: https://localhost:9443/client-registration/v0.17/register
 
 # Datasource configurations
-wso2am_db_type: h2
-wso2am_db_url: jdbc:h2:./repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
-wso2am_db_username: wso2carbon
-wso2am_db_password: wso2carbon
+wso2am_db_type: postgres
+wso2am_db_url: jdbc:postgresql://wso2-db.cmlelzqpemzm.us-east-1.rds.amazonaws.com:5432/WSO2AM_DB
+wso2am_db_username: postgres
+wso2am_db_password: sapatovelho
+wso2am_db_validation_query: SELECT 1
 
-wso2shared_db_type: h2
-wso2shared_db_url: jdbc:h2:./repository/database/WSO2SHARED_DB;DB_CLOSE_ON_EXIT=FALSE
-wso2shared_db_username: wso2carbon
-wso2shared_db_password: wso2carbon
+wso2shared_db_type: postgres
+wso2shared_db_url: jdbc:postgresql://wso2-db.cmlelzqpemzm.us-east-1.rds.amazonaws.com:5432/WSO2SHARED_DB
+wso2shared_db_username: postgres
+wso2shared_db_password: sapatovelho
+wso2shared_db_validation_query: SELECT 1
 
 # Key Store and Trust Store configuration
 primary_key_store_name: wso2carbon.jks

@@ -18,6 +18,8 @@ wget https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.
 * OBS: Não esqueça de renomear o nome do arquivo de acordo com o video
 ```
 
+- [Criar um banco Postgres RDS](https://aws.amazon.com/pt/getting-started/hands-on/create-connect-postgresql-db/?nc1=h_ls)
+
 - [PGADMIN para Docker](https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html)
 
 ```
