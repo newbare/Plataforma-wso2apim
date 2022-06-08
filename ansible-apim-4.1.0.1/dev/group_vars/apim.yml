@@ -47,11 +47,11 @@ performance_tuning_file_list:
 # If custom primary keystores and truststores are need to be added, uncomment the below list
 # Add the required files under files/security/<product-home>/<path-to-file>
 # A sample is given below
-# security_file_list:
-#   - { src: '{{ security_file_location }}/wso2am/client-truststore.jks',
-#       dest: '{{ carbon_home }}/repository/resources/security/client-truststore.jks' }
-#   - { src: '{{ security_file_location }}/wso2am/wso2carbon.jks',
-#       dest: '{{ carbon_home }}/repository/resources/security/wso2carbon.jks' }
+security_file_list:
+  - { src: '{{ security_file_location }}/wso2am/client-truststore.jks',
+      dest: '{{ carbon_home }}/repository/resources/security/client-truststore.jks' }
+  - { src: '{{ security_file_location }}/wso2am/wso2carbon.jks',
+      dest: '{{ carbon_home }}/repository/resources/security/wso2carbon.jks' }
 
 # If custom tls keystore needs to be added, uncomment the below list
 # Add the required files under files/security/<product-home>/<path-to-file>
