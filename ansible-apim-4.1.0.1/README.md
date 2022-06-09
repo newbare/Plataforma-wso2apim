@@ -48,9 +48,7 @@ docker run -d -p 8000:8000 -p 9443:9443 --name portainer \
 
 - [Driver Postgres](https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.10/postgresql-42.2.10.jar)
 
-
-
-
+- [Quakus API do Jefera](https://github.com/newbare/quarkus-wso2)
 
 
 # WSO2 API Management Ansible scripts
@@ -284,3 +282,11 @@ regexp=(
   /services/auth/callback/login|https://ec2-52-67-31-221.sa-east-1.compute.amazonaws.com:9443/publisher/services/auth/callback/logout)
 
 regexp=(https://localhost:9443/publisher/services/auth/callback/login|https://localhost:9443/publisher/services/auth/callback/logout)
+
+## Target Group AWS para ALB
+[Certificado auto assinado](https://medium.com/@francisyzy/create-aws-elb-with-self-signed-ssl-cert-cd1c352331f)
+`helth check APIM curl -v http://ec2-44-201-113-40.compute-1.amazonaws.com:9443/services/Version`
+
+[matcher](https://www.sslshopper.com/certificate-key-matcher.html)
+
+LB-WSO2-1091626109.us-east-1.elb.amazonaws.com
