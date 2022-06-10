@@ -1,5 +1,5 @@
 # Links úteis:
-
+- [Curso AWS Eduardo Lara](https://www.eduardolara.com.br/#curso)
 - [WSO2 API MANAGER](https://wso2.com/br/api-manager/#)
 
 - [Binário da Versão 4.1.0 Community](https://github.com/wso2/product-apim/releases/download/v4.1.0/wso2am-4.1.0.zip)
@@ -277,8 +277,6 @@ Branch name: 4.0.x
 
 
 
-## Curso AWS
-[Eduardo Lara](https://www.eduardolara.com.br/#curso)
 
 ## Target Group AWS para ALB
 [Certificado auto assinado](https://medium.com/@francisyzy/create-aws-elb-with-self-signed-ssl-cert-cd1c352331f)
