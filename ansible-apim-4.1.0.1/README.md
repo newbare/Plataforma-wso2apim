@@ -305,3 +305,11 @@ lb-aws-wso2-665612561.us-east-1.elb.amazonaws.com
 Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://localhost:8243/pizzashack/1.0.0/menu. (Reason: CORS request did not succeed). Status code: (null).
 
 
+# Erro de cors
+- habilite cors_enable = true em apim.yml
+Por padrão, os navegadores da Web aplicam a política de mesma origem para evitar interações entre origens diferentes. O CORS define uma maneira pela qual um navegador e um servidor podem interagir para determinar se é seguro ou não permitir solicitações de origem cruzada. É por isso que você recebeu o erro abaixo mencionado no navegador.
+
+Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://lb-wso2-1425364127.sa-east-1.elb.amazonaws.com:8243/pizzashack/1.0.0/menu. (Reason: CORS request did not succeed). Status code: (null).
+
+# problemas ao carregar no Chrome com Mac
+Há uma senha secreta embutida na página de erro. Apenas certifique-se de que a página esteja selecionada (clique em qualquer lugar da tela) e digite thisisunsafe.
