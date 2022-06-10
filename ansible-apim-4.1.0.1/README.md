@@ -302,4 +302,6 @@ lb-aws-wso2-665612561.us-east-1.elb.amazonaws.com
 `openssl x509 -inform PEM -in certificate.crt > public.pem`
 
 
+Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://localhost:8243/pizzashack/1.0.0/menu. (Reason: CORS request did not succeed). Status code: (null).
+
 

@@ -80,14 +80,14 @@ pack_location: local
 #remote_pack: "<URL_TO_APIM_PACK>" Ex:- "https://github.com/wso2/product-apim/releases/download/v4.1.0/wso2am-4.1.0.zip"
 
 # JDK Distributions
-setup_java_enabled: false #If this is set to false java_home variable below needs to be specified.
+setup_java_enabled: true #If this is set to false java_home variable below needs to be specified.
 jdk_name: amazon-corretto-11.0.14.1-linux-x64 # Update this as per jdk version you use
 java_dir: /opt
 java_symlink: "{{ java_dir }}/java"
 java_home: "{{ java_dir }}/{{ jdk_name }}"
 
 # WSO2 Distributions
-setup_wso2_enabled: false
+setup_wso2_enabled: true
 
 # Server URL of the Authentication service. Make sure to import the Key Manager's public certificate to WSO2 API-M's
 # client-truststore.jks. For more information, see https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores
