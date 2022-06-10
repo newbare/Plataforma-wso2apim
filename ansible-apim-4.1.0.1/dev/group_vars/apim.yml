@@ -29,6 +29,9 @@ security_file_location: "{{ product_package_location }}/security"
 jdbc_driver: postgresql-42.2.10.jar
 postgres_driver: org.postgresql.Driver
 
+# Heap memory allocation
+apim_memory: -Xms512m -Xmx1024m
+
 # Set backup_enabled to true to backup <carbon-home>/repository/deployment/server directory
 backup_enabled: false
 
