@@ -91,7 +91,7 @@ setup_wso2_enabled: true
 
 # Server URL of the Authentication service. Make sure to import the Key Manager's public certificate to WSO2 API-M's
 # client-truststore.jks. For more information, see https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores
-key_manager_server_url: https://lb-wso2-1425364127.sa-east-1.elb.amazonaws.com:${mgt.transport.https.port}/services/
+sudokey_manager_server_url: https://lb-wso2-1425364127.sa-east-1.elb.amazonaws.com:${mgt.transport.https.port}/services/
 ####
 # API Store related configurations
 api_devportal_url: https://lb-wso2-1425364127.sa-east-1.elb.amazonaws.com:${mgt.transport.https.port}/devportal
