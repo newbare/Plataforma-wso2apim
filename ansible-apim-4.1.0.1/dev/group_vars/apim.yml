@@ -88,6 +88,8 @@ java_home: "{{ java_dir }}/{{ jdk_name }}"
 
 # WSO2 Distributions
 setup_wso2_enabled: true
+# Enable Cors
+cors_enabled: true
 
 # Server URL of the Authentication service. Make sure to import the Key Manager's public certificate to WSO2 API-M's
 # client-truststore.jks. For more information, see https://docs.wso2.com/display/ADMIN44x/Creating+New+Keystores
