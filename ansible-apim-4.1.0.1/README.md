@@ -278,7 +278,7 @@ Branch name: 4.0.x
 
 
 ## Curso AWS
-[Eduardo Lara](https://www.udemy.com/course/preparatorio-exame-aws-certified-cloud-practitioner-clf-c01/)
+[Eduardo Lara](https://www.eduardolara.com.br/#curso)
 
 ## Target Group AWS para ALB
 [Certificado auto assinado](https://medium.com/@francisyzy/create-aws-elb-with-self-signed-ssl-cert-cd1c352331f)
