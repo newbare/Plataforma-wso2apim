@@ -277,11 +277,8 @@ Branch name: 4.0.x
 
 
 
-## Atualizando service provider
-regexp=(
-  /services/auth/callback/login|https://ec2-52-67-31-221.sa-east-1.compute.amazonaws.com:9443/publisher/services/auth/callback/logout)
-
-regexp=(https://localhost:9443/publisher/services/auth/callback/login|https://localhost:9443/publisher/services/auth/callback/logout)
+## Curso AWS
+[Eduardo Lara](https://www.udemy.com/course/preparatorio-exame-aws-certified-cloud-practitioner-clf-c01/)
 
 ## Target Group AWS para ALB
 [Certificado auto assinado](https://medium.com/@francisyzy/create-aws-elb-with-self-signed-ssl-cert-cd1c352331f)
@@ -289,4 +286,19 @@ regexp=(https://localhost:9443/publisher/services/auth/callback/login|https://lo
 
 [matcher](https://www.sslshopper.com/certificate-key-matcher.html)
 
-LB-WSO2-1091626109.us-east-1.elb.amazonaws.com
+lb-aws-wso2-665612561.us-east-1.elb.amazonaws.com
+
+1. Gere o certificado autoassinado usando este comando:
+
+`openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout privateKey.key -out certificate.crt`
+
+2. Verifique a chave e o certificado gerados
+`openssl rsa -in privateKey.key -check`
+`openssl x509 -in certificate.crt -text -noout`
+
+3. Converta a chave e o certificado em arquivo codificado .pem
+`openssl rsa -in privateKey.key -text > private.pem`
+`openssl x509 -inform PEM -in certificate.crt > public.pem`
+
+
+
