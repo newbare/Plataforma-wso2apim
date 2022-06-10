@@ -26,8 +26,7 @@ ports_offset: 0
 # api-manager.xml configs
 oauth_configs_revoke_api_url: https://lb-wso2-1425364127.sa-east-1.elb.amazonaws.com:${https.nio.port}/revoke
 
-# Heap memory allocation
-apim_memory: -Xms256m -Xmx1024m
+
 
 # List of configuration file templates, and the paths they should be written to
 config_files:
