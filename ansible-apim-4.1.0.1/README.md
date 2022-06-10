@@ -315,7 +315,7 @@ Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remot
 Há uma senha secreta embutida na página de erro. Apenas certifique-se de que a página esteja selecionada (clique em qualquer lugar da tela) e digite thisisunsafe.
 
 # Sincronizando artefatos do Gateway no cluster wso2
-- [Sincronizando artefatos](https://apim.docs.wso2.com/en/3.2.0/install-and-setup/setup/distributed-deployment/synchronizing-artifacts-in-a-gateway-cluster/)
+- [Sincronizando artefatos API Manager](https://apim.docs.wso2.com/en/3.2.0/install-and-setup/setup/distributed-deployment/synchronizing-artifacts-in-a-gateway-cluster/)
 
 [apim.sync_runtime_artifacts.publisher]
 artifact_saver = "DBSaver"
@@ -324,3 +324,7 @@ publish_directly_to_gateway = "false"
 - Publique Apis com uma unica Instancia rodando
 
 [Sticky sessions](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/sticky-sessions.html)
+
+# Habilitar o Cluster
+- [setar a váriavel no arquivo deployment.toml](https://apim.docs.wso2.com/en/latest/install-and-setup/setup/distributed-deployment/deploying-wso2-api-m-in-a-distributed-setup/)
+`server_role = "ha"`

@@ -3,7 +3,8 @@ hostname = "{{ hostname }}"
 offset="{{ ports_offset }}"
 base_path = "${carbon.protocol}://${carbon.host}:${carbon.management.port}"
 #discard_empty_caches = false
-server_role = "default"
+server_role = "ha"
+
 
 [super_admin]
 username = "{% if secure_vault_enabled|bool %}$secret{admin_username}{% else %}{{ admin_username }}{% endif %}"
@@ -293,3 +294,7 @@ internal_key_store_password = "[{{ internal_key_store_password }}]"
 tls_key_store_key_password = "[{{ tls_key_store_key_password }}]"
 tls_key_store_password = "[{{ tls_key_store_password }}]"
 {% endif %}
+
+[apim.sync_runtime_artifacts.publisher]
+artifact_saver = "DBSaver"
+publish_directly_to_gateway = "false"
