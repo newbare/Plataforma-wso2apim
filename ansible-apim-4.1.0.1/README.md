@@ -1,6 +1,8 @@
 # Links úteis:
 - [Curso AWS Eduardo Lara](https://www.eduardolara.com.br/#curso)
 - [WSO2 API MANAGER](https://wso2.com/br/api-manager/#)
+- [Testar certificados online - matcher](https://www.sslshopper.com/certificate-key-matcher.html)
+- [Tutorial Certificado auto assinado](https://medium.com/@francisyzy/create-aws-elb-with-self-signed-ssl-cert-cd1c352331f)
 
 - [Binário da Versão 4.1.0 Community](https://github.com/wso2/product-apim/releases/download/v4.1.0/wso2am-4.1.0.zip)
 
@@ -279,10 +281,10 @@ Branch name: 4.0.x
 
 
 ## Target Group AWS para ALB
-[Certificado auto assinado](https://medium.com/@francisyzy/create-aws-elb-with-self-signed-ssl-cert-cd1c352331f)
+
 `helth check APIM curl -v http://ec2-44-201-113-40.compute-1.amazonaws.com:9443/services/Version`
 
-[matcher](https://www.sslshopper.com/certificate-key-matcher.html)
+
 
 LB-AWS-WSO2-665612561.us-east-1.elb.amazonaws.com
 lb-aws-wso2-665612561.us-east-1.elb.amazonaws.com
