@@ -286,6 +286,7 @@ Branch name: 4.0.x
 
 [matcher](https://www.sslshopper.com/certificate-key-matcher.html)
 
+LB-AWS-WSO2-665612561.us-east-1.elb.amazonaws.com
 lb-aws-wso2-665612561.us-east-1.elb.amazonaws.com
 
 1. Gere o certificado autoassinado usando este comando:
